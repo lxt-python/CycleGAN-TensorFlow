@@ -1,3 +1,6 @@
+'''
+把原始图片转换为tfrecords格式
+'''
 import tensorflow as tf
 import os
 import random
@@ -103,4 +106,5 @@ def main(unused_argv):
   data_writer(FLAGS.Y_input_dir, FLAGS.Y_output_file)
 
 if __name__ == '__main__':
+  # print(__doc__)
   tf.app.run()

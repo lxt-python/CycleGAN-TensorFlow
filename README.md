@@ -2,6 +2,7 @@
 An implementation of CycleGan using TensorFlow.
 
 Original paper: https://arxiv.org/abs/1703.10593
+Source code: https://github.com/nanfengpo/CycleGAN-TensorFlow/tree/r1.0
 
 ## Results on test data
 
@@ -23,7 +24,23 @@ Original paper: https://arxiv.org/abs/1703.10593
 * TensorFlow 1.1
 * Python 3.5.2
 
-## Data preparing
+## FlameNetwork
+- build_data.py
+- train.py
+  - model.py
+    - ops.py
+    - utils.py
+    - reader.py
+      - utils.py 
+    - generator.py
+      - ops.py
+      - utils.py 
+    - discriminator.py
+      - ops.py
+  - utils.py
+  
+
+## 1.Data preparing
 
 * First, download a dataset, e.g. apple2orange
 
@@ -39,7 +56,7 @@ $ python3 build_data.py
 
 Check `$ python3 build_data.py --help` for more details.
 
-## Training
+## 2.Training
 
 ```bash
 $ python3 train.py
@@ -105,7 +122,7 @@ Here are some funny screenshots from TensorBoard when training orange -> apple:
 * If you observe that background colors of input and generated images are high contrast (e.g. black becomes white), you should restart your training!
 * Train several times to get the best models.
 
-## Export model
+## 3.Export model
 You can export from a checkpoint to a standalone GraphDef file as follow:
 
 ```bash
@@ -116,7 +133,7 @@ $ python3 export_graph.py --checkpoint_dir checkpoints/${datetime}} \
 ```
 
 
-## Inference
+## 4.Inference
 After exporting model, you can use it for inference. For example:
 
 ```bash
@@ -126,16 +143,3 @@ python3 inference.py --model pretrained/apple2orange.pb \
                        --image_size 256
 ```
 
-## Pretrained models
-My pretrained models are available at https://github.com/vanhuyz/CycleGAN-TensorFlow/releases
-
-## Contributing
-Please open an issue if you have any trouble or found something incorrect in my code :)
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-* CycleGAN paper: https://arxiv.org/abs/1703.10593
-* Official source code in Torch: https://github.com/junyanz/CycleGAN

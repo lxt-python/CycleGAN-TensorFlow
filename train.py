@@ -1,6 +1,5 @@
 import tensorflow as tf
 from model import CycleGAN
-from reader import Reader
 from datetime import datetime
 import os
 import logging
@@ -36,6 +35,7 @@ def train():
   checkpoints_dir = "checkpoints/{}".format(current_time)
   os.makedirs(checkpoints_dir, exist_ok=True)
 
+  # 定义图
   graph = tf.Graph()
   with graph.as_default():
     cycle_gan = CycleGAN(
@@ -57,6 +57,7 @@ def train():
     train_writer = tf.summary.FileWriter(checkpoints_dir, graph)
     saver = tf.train.Saver()
 
+  # 运行图
   with tf.Session(graph=graph) as sess:
     sess.run(tf.global_variables_initializer())
 

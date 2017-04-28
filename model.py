@@ -1,3 +1,8 @@
+'''
+生成对抗模型：
+- 生成：Generator
+- 对抗：Discriminator
+'''
 import tensorflow as tf
 import ops
 import utils
