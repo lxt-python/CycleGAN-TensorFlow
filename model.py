@@ -138,10 +138,10 @@ class CycleGAN:
       )
       tf.summary.scalar('learning_rate/{}'.format(name), learning_rate)
 
-      # 主体：优化函数
+      # 主体：优化函数。var_list指明哪些参数可以训练！！！
       learning_step = (
           tf.train.AdamOptimizer(learning_rate, beta1=beta1, name=name)
-                  .minimize(loss, global_step=global_step, var_list=variables) # var_list指明哪些参数可以训练！！！
+                  .minimize(loss, global_step=global_step, var_list=variables)
       )
       return learning_step
 

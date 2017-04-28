@@ -24,7 +24,7 @@ Source code: https://github.com/nanfengpo/CycleGAN-TensorFlow/tree/r1.0
 * TensorFlow 1.1
 * Python 3.5.2
 
-## FlameNetwork
+## Frame Structure
 - build_data.py
 - train.py
   - model.py
