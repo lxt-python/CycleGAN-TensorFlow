@@ -64,6 +64,11 @@ class CycleGAN:
         shape=[batch_size, image_size, image_size, 3])
 
   def model(self):
+    '''
+    构建生成对抗网络
+    :return:
+    - G_loss：
+    '''
     X_reader = Reader(self.X_train_file, name='X',
         image_size=self.image_size, batch_size=self.batch_size)
     Y_reader = Reader(self.Y_train_file, name='Y',

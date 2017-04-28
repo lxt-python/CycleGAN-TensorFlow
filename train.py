@@ -53,6 +53,7 @@ def train():
     G_loss, D_Y_loss, F_loss, D_X_loss, fake_y, fake_x = cycle_gan.model()
     optimizers = cycle_gan.optimize(G_loss, D_Y_loss, F_loss, D_X_loss)
 
+    # 设置tensorboard
     summary_op = tf.summary.merge_all()
     train_writer = tf.summary.FileWriter(checkpoints_dir, graph)
     saver = tf.train.Saver()

@@ -38,6 +38,10 @@ Source code: https://github.com/nanfengpo/CycleGAN-TensorFlow/tree/r1.0
     - discriminator.py
       - ops.py
   - utils.py
+- export_graph.py
+  - model.py
+- inference.py
+  - utils.py
   
 
 ## 1.Data preparing

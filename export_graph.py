@@ -47,8 +47,10 @@ def export_graph(model_name, XtoY=True):
     tf.train.write_graph(output_graph_def, 'pretrained', model_name, as_text=False)
 
 def main(unused_argv):
+  # 导出XtoY的模型
   print('Export XtoY model...')
   export_graph(FLAGS.XtoY_model, XtoY=True)
+  # 导出YtoX的模型
   print('Export YtoX model...')
   export_graph(FLAGS.YtoX_model, XtoY=False)
 
