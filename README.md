@@ -20,8 +20,8 @@ Original paper: https://arxiv.org/abs/1703.10593
 
 ## Environment
 
-* TensorFlow 1.0.0
-* Python 3.6.0
+* TensorFlow 1.1
+* Python 3.5.2
 
 ## Data preparing
 
