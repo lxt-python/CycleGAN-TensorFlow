@@ -67,7 +67,12 @@ class CycleGAN:
     '''
     构建生成对抗网络
     :return:
-    - G_loss：
+    - G_loss：真橘子和假橘子的差距
+    - D_Y_loss：
+    - F_loss：
+    - D_X_loss：
+    - fake_y：
+    - fake_x：
     '''
     X_reader = Reader(self.X_train_file, name='X',
         image_size=self.image_size, batch_size=self.batch_size)
@@ -133,19 +138,29 @@ class CycleGAN:
       )
       tf.summary.scalar('learning_rate/{}'.format(name), learning_rate)
 
+      # 主体：优化函数
       learning_step = (
           tf.train.AdamOptimizer(learning_rate, beta1=beta1, name=name)
-                  .minimize(loss, global_step=global_step, var_list=variables)
+                  .minimize(loss, global_step=global_step, var_list=variables) # var_list指明哪些参数可以训练！！！
       )
       return learning_step
 
+    # ======主体=====
+    # X to Y
+    # 运行生成网络，训练self.G.variables，使得G_loss最小
     G_optimizer = make_optimizer(G_loss, self.G.variables, name='Adam_G')
+    # 运行辨别网络，训练self.D_Y.variables，使得D_Y_loss最小
     D_Y_optimizer = make_optimizer(D_Y_loss, self.D_Y.variables, name='Adam_D_Y')
+
+    # Y to X
+    # 运行生成网络，训练self.G.variables，使得G_loss最小
     F_optimizer =  make_optimizer(F_loss, self.F.variables, name='Adam_F')
+    # 运行辨别网络，训练self.D_Y.variables，使得D_Y_loss最小
     D_X_optimizer = make_optimizer(D_X_loss, self.D_X.variables, name='Adam_D_X')
 
+    # 等待优化完成。control_dependencies在这里就是起到确保优化操作完成的作用。
     with tf.control_dependencies([G_optimizer, D_Y_optimizer, F_optimizer, D_X_optimizer]):
-      return tf.no_op(name='optimizers')
+      return tf.no_op(name='optimizers') # no_op：什么也不做
 
   def discriminator_loss(self, D, y, fake_y, use_lsgan=True):
     """ Note: default: D(y).shape == (batch_size,5,5,1),

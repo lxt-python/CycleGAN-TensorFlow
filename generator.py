@@ -46,6 +46,7 @@ class Generator:
           activation='tanh', reuse=self.reuse, name='output')           # (?, w, h, 3)
     # set reuse=True for next call
     self.reuse = True
+    # 重要！收集生成网络中可训练的参数集合，用于在model.py中训练
     self.variables = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=self.name)
 
     return output

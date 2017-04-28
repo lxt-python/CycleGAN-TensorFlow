@@ -39,6 +39,7 @@ class Discriminator:
           use_sigmoid=self.use_sigmoid, name='output')          # (?, 5, 5, 1)
 
     self.reuse = True
+    # 重要！收集辨别网络中可训练的参数集合，用于在model.py中训练
     self.variables = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=self.name)
 
     return output

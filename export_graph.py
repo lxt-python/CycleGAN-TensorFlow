@@ -22,7 +22,7 @@ tf.flags.DEFINE_integer('image_size', '256', 'image size, default: 256')
 
 def export_graph(model_name, XtoY=True):
   graph = tf.Graph()
-
+  # 构建图
   with graph.as_default():
     cycle_gan = CycleGAN(norm='instance')
 
@@ -41,6 +41,7 @@ def export_graph(model_name, XtoY=True):
     sess.run(tf.global_variables_initializer())
     latest_ckpt = tf.train.latest_checkpoint(FLAGS.checkpoint_dir)
     restore_saver.restore(sess, latest_ckpt)
+    # 把变量（参数）变成常量，用于导出图
     output_graph_def = tf.graph_util.convert_variables_to_constants(
         sess, graph.as_graph_def(), [output_image.op.name])
 
